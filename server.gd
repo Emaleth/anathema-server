@@ -4,6 +4,8 @@ var network := ENetMultiplayerPeer.new()
 var port := 1989
 var max_players := 100
 
+@onready var player_verification := $PlayerVerification
+
 
 func _ready() -> void:
 	StartServer()
@@ -20,6 +22,7 @@ func StartServer() -> void:
 
 func _Peer_Connected(player_id):
 	print("User " + str(player_id) + " Connected")
+	player_verification.start(player_id)
 
 
 func _Peer_Disconnected(player_id):
