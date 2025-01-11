@@ -1,4 +1,4 @@
 extends Node
 
 
-var player_name : String = "e"
+var player_name : String = "Emaleth"
