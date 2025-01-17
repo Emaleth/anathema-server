@@ -10,7 +10,7 @@ func start(player_id):
 	get_parent().server_to_client_token(player_id)
 
 
-func CreatePlayerContainer(player_id):
+func CreatePlayerContainer(player_id, uuid):
 	var new_player_container = player_container_scene.instantiate()
 	new_player_container.name = str(player_id)
 	get_parent().add_child(new_player_container, true)
@@ -24,7 +24,8 @@ func Verify(player_id, token):
 	while int(Time.get_unix_time_from_system()) - int(token.right(-64)) <= 30:
 		if get_parent().expected_tokens.has(token):
 			token_verification = true
-			CreatePlayerContainer(player_id)
+   var uuid = get_parent().expected_tokens[token]
+			CreatePlayerContainer(player_id, uuid)
 			awaiting_verification.erase(player_id)
 			get_parent().expected_tokens.erase(token)
 			break
