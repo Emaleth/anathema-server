@@ -46,13 +46,13 @@ func server_to_client_broadcast_new_chat_message(sender, timestamp, text):
 func _on_token_expiration_timer_timeout() -> void:
 	var current_time = int(Time.get_unix_time_from_system())
 	var token_time
-	if expected_tokens == []:
+	if expected_tokens == {}:
 		pass
 	else:
-		for i in range(expected_tokens.size() -1, -1, -1):
+		for i in expected_tokens:
 			token_time = int(expected_tokens[i].right(-64))
 			if current_time - token_time >= 30:
-				expected_tokens.remove_at(i)
+				expected_tokens.erase(i)
 
 @rpc("reliable")
 func server_to_client_token(player_id):

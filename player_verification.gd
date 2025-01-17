@@ -12,19 +12,24 @@ func start(player_id):
 
 func CreatePlayerContainer(player_id, uuid):
 	var new_player_container = player_container_scene.instantiate()
+	var player_data = {}
+	if CharacterDatabase.data.has(uuid):
+		player_data = CharacterDatabase.data[uuid]
 	new_player_container.name = str(player_id)
 	get_parent().add_child(new_player_container, true)
-	FillPlayerContainer(player_id)
+	FillPlayerContainer(player_id, player_data)
 
-func FillPlayerContainer(player_id):
-	print(get_parent().get_node(str(player_id)).player_name)
+
+func FillPlayerContainer(player_id, data):
+	get_parent().get_node(str(player_id)).data = data
+	print(get_parent().get_node(str(player_id)).data)
 
 func Verify(player_id, token):
 	var token_verification = false
 	while int(Time.get_unix_time_from_system()) - int(token.right(-64)) <= 30:
 		if get_parent().expected_tokens.has(token):
 			token_verification = true
-   var uuid = get_parent().expected_tokens[token]
+			var uuid = get_parent().expected_tokens[token]
 			CreatePlayerContainer(player_id, uuid)
 			awaiting_verification.erase(player_id)
 			get_parent().expected_tokens.erase(token)
