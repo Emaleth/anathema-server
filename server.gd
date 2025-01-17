@@ -5,7 +5,7 @@ var port := 1989
 var max_players := 100
 
 @onready var player_verification := $PlayerVerification
-var expected_tokens = []
+var expected_tokens := {}
 
 func _ready() -> void:
 	StartServer()
