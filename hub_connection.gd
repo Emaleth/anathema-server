@@ -34,7 +34,7 @@ func _OnConnectionSucceeded():
 	print("Succesfully connected to game server hub")
 
 @rpc("reliable")
-func authenticator_to_server_DistributeLoginToken(token):
+func authenticator_to_server_DistributeLoginToken(token, uuid):
 	gameserver.expected_tokens.append(token)
 
 
