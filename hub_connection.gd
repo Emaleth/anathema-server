@@ -35,7 +35,7 @@ func _OnConnectionSucceeded():
 
 @rpc("reliable")
 func authenticator_to_server_DistributeLoginToken(token, uuid):
-	gameserver.expected_tokens.append(token)
+	gameserver.expected_tokens[token] = uuid
 
 
 func _OnDisconnection():
