@@ -32,7 +32,8 @@ func _Peer_Disconnected(player_id):
 
 @rpc("any_peer", "reliable")
 func client_to_server_new_chat_message(text):
-	var sender = multiplayer.get_remote_sender_id()
+	var sender_id = multiplayer.get_remote_sender_id()
+	var sender = get_node(str(sender_id)).uuid
 	var time = Time.get_time_dict_from_system()
 	var timestamp = str(time.hour, ":" ,time.minute)
 	server_to_client_broadcast_new_chat_message(sender, timestamp, text)
@@ -66,3 +67,7 @@ func client_to_server_token(token):
 @rpc("reliable")
 func server_to_player_token_result(player_id, token_verification):
 	multiplayer.rpc(player_id, self, "server_to_player_token_result", [token_verification])
+
+@rpc("reliable")
+func server_to_player_player_data(player_id, uuid, data):
+	multiplayer.rpc(player_id, self, "server_to_player_player_data", [uuid, data])

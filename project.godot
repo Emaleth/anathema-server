@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 HubConnection="*res://hub_connection.gd"
 CharacterDatabase="*res://character_database.gd"
+Character="*res://character.gd"
+Movement="*res://movement.gd"
 
 [editor_plugins]
 

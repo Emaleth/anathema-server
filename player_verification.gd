@@ -17,12 +17,14 @@ func CreatePlayerContainer(player_id, uuid):
 		player_data = CharacterDatabase.data[uuid]
 	new_player_container.name = str(player_id)
 	get_parent().add_child(new_player_container, true)
-	FillPlayerContainer(player_id, player_data)
+	FillPlayerContainer(player_id, uuid, player_data)
 
 
-func FillPlayerContainer(player_id, data):
+func FillPlayerContainer(player_id, uuid, data):
 	get_parent().get_node(str(player_id)).data = data
+	get_parent().get_node(str(player_id)).uuid = uuid
 	print(get_parent().get_node(str(player_id)).data)
+	get_parent().server_to_player_player_data(player_id, uuid, data)
 
 func Verify(player_id, token):
 	var token_verification = false
